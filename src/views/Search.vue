@@ -7,11 +7,14 @@
         <button @click="add">
             Data is: {{ data }}
         </button>
+
+        <Demo @click.native="use"></Demo>
     </div>
 </template>
 
 <script>
 import { reactive, computed, ref, watchEffect, onMounted, toRefs } from '@vue/composition-api'
+import Demo from '@/components/Demo'
 
 function useCount() {
     const count = ref(0)
@@ -45,12 +48,21 @@ export default {
     setup() {
         const { count, increment } = useCount()
         const { data, add } = useReactive()
+
+        function use() {
+            console.log(123)
+        }
+
         return {
             count,
             increment,
             data,
-            add
+            add,
+            use
         }
+    },
+    components: {
+        Demo
     }
 }
 </script>
